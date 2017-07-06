@@ -3,5 +3,6 @@ Rails.application.routes.draw do
 root "home#index"
 get "/creatures", to: "creatures#index", as: "creatures"
 get "/creatures/:id", to: "creatures#show", as: "creature"
+post "creatures", to: "creatures#create"
 
 end

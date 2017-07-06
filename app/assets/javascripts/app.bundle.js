@@ -8815,13 +8815,19 @@ exports.default = CreaturesController;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-newCreatureController.$inject = ['creaturesService'];
-function newCreatureController(creaturesService) {
+newCreatureController.$inject = ['creaturesService', '$state'];
+
+function newCreatureController(creaturesService, $state) {
   var vm = this;
+  vm.creature = {};
+
+  console.log('hello');
 
   vm.saveCreature = function () {
-    creaturesService.saveCreature().then(function (response) {
-      vm.creature = response.creature;
+    console.log("hi");
+    creaturesService.saveCreature(vm.creature).then(function (response) {
+      vm.creature = response;
+      $state.go("home");
     });
   };
 }
@@ -45044,8 +45050,6 @@ var _new2 = _interopRequireDefault(_new);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-console.log("new creature component");
-
 var newCreatureComponent = {
   controller: _newController2.default,
   template: _new2.default
@@ -45057,7 +45061,7 @@ angular.module("BogApp").component("newCreature", newCreatureComponent);
 /* 96 */
 /***/ (function(module, exports) {
 
-module.exports = "\n<h1>FORM</h1>\n";
+module.exports = "\n<h1>Enter Details About New Creature</h1>\n\n<form ng-submit=\"$ctrl.saveCreature()\">\n  <div>\n    <label for=\"newCreature-name\">Name:</label>\n    <input type=\"text\" id=\"newCreature-Name\" ng-model=\"$ctrl.creature.name\" placeholder=\"Creature name\">\n  </div>\n  <div>\n    <label for=\"newCreature-description\">Description:</label>\n    <input type=\"text\" id=\"newCreature-Description\" ng-model=\"$ctrl.creature.description\" placeholder=\"Creature description\">\n  </div>\n  <button class=\"submit_button\" type=\"submit\" value=\"Submit\">Submit</button>\n  <a class =\"nevermind_button\" ui-sref=\"home\">Nevermind</a>\n</form>\n";
 
 /***/ }),
 /* 97 */
