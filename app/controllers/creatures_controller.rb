@@ -30,6 +30,16 @@ class CreaturesController < ApplicationController
     end
   end
 
+  def delete
+    @creature = Creature.find(params[:id])
+    if @creature.delete
+      render json: {message: "creature was successfully deleted"}
+    else
+      render status: 500,
+      json: {error: "error deleting creature with id "+@creature.id}
+    end
+  end
+
   private
   def creature_params
     params.require(:creature).permit(:name, :description)

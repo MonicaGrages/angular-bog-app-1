@@ -8864,8 +8864,8 @@ exports.default = newCreatureController;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-CreatureController.$inject = ["$stateParams", 'creaturesService'];
-function CreatureController($stateParams, creaturesService) {
+CreatureController.$inject = ["$stateParams", 'creaturesService', '$state'];
+function CreatureController($stateParams, creaturesService, $state) {
   var vm = this;
 
   function activate() {
@@ -8880,6 +8880,12 @@ function CreatureController($stateParams, creaturesService) {
       vm.creature = response;
     });
     vm.isEditing = false;
+  };
+
+  vm.deleteCreature = function () {
+    creaturesService.deleteCreature(vm.creature.id).then(function (response) {
+      $state.go('home');
+    });
   };
 
   activate();
@@ -45155,7 +45161,7 @@ angular.module("BogApp").component("creature", creatureComponent);
 /* 101 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>{{$ctrl.creature.name}}</h1>\n<p>{{$ctrl.creature.description}}</p>\n<a ng-click= \"$ctrl.isEditing = true\">Edit This Creature</a>\n<a ui-sref=\"home\">Back</a>\n\n<div ng-if=\"$ctrl.isEditing\">\n  <h4>Edit Creature Details</h4>\n  <form ng-submit=\"$ctrl.updateCreature($ctrl.creatureToEdit.id)\">\n    <div>\n      <label for=\"newCreature-name\">Name:</label>\n      <input type=\"text\" id=\"newCreature-Name\" ng-model=\"$ctrl.creature.name\">\n    </div>\n    <div>\n      <label for=\"newCreature-description\">Description:</label>\n      <input type=\"text\" id=\"newCreature-Description\" ng-model=\"$ctrl.creature.description\">\n    </div>\n    <button class=\"submit_button\" type=\"submit\" value=\"Submit\">Submit</button>\n    <a ng-click=\"$ctrl.isEditing=false\">Nevermind</a>\n  </form>\n</div\n";
+module.exports = "<h1>{{$ctrl.creature.name}}</h1>\n<p>{{$ctrl.creature.description}}</p>\n<a ng-click= \"$ctrl.isEditing = true\">Edit This Creature</a>\n<a ui-sref=\"home\">Back</a>\n\n<div ng-if=\"$ctrl.isEditing\">\n  <h4>Edit Creature Details</h4>\n  <form ng-submit=\"$ctrl.updateCreature($ctrl.creatureToEdit.id)\">\n    <div>\n      <label for=\"newCreature-name\">Name:</label>\n      <input type=\"text\" id=\"newCreature-Name\" ng-model=\"$ctrl.creature.name\">\n    </div>\n    <div>\n      <label for=\"newCreature-description\">Description:</label>\n      <input type=\"text\" id=\"newCreature-Description\" ng-model=\"$ctrl.creature.description\">\n    </div>\n    <button class=\"submit_button\" type=\"submit\" value=\"Submit\">Submit</button>\n    <a ng-click=\"$ctrl.isEditing=false\">Nevermind</a>\n  </form>\n  <a ng-click=\"$ctrl.deleteCreature()\">Delete This Creature</a>\n</div>\n";
 
 /***/ }),
 /* 102 */
@@ -45193,6 +45199,10 @@ function creaturesService($http) {
     return $http.put("/creatures/" + creatureToEdit.id, creatureToEdit).then(function (res) {
       return res.data;
     });
+  };
+
+  service.deleteCreature = function (creatureId) {
+    return $http.delete('/creatures/' + creatureId);
   };
 
   return service;

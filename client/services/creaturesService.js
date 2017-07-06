@@ -30,6 +30,10 @@ function creaturesService ($http) {
       })
   }
 
+  service.deleteCreature = function(creatureId) {
+    return $http.delete('/creatures/'+creatureId);
+  }
+
   return service;
 }
 

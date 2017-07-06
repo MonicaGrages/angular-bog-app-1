@@ -1,5 +1,5 @@
-CreatureController.$inject = ["$stateParams", 'creaturesService'];
-function CreatureController($stateParams, creaturesService){
+CreatureController.$inject = ["$stateParams", 'creaturesService', '$state'];
+function CreatureController($stateParams, creaturesService, $state){
   var vm = this;
 
   function activate() {
@@ -14,6 +14,12 @@ function CreatureController($stateParams, creaturesService){
       vm.creature = response;
     })
     vm.isEditing = false;
+  }
+
+  vm.deleteCreature = function() {
+    creaturesService.deleteCreature(vm.creature.id).then(response => {
+      $state.go('home');
+    })
   }
 
 
