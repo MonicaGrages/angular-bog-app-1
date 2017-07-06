@@ -1,0 +1,10 @@
+<h1>Artists</h1>
+<div class="btn btn-large" ui-sref="newCreature">+ New Creature</div>
+<div class="creatures-container">
+    <div class="creature" ng-repeat="creature in $ctrl.creatures" ui-sref="creature({id: creature.id})">
+        <div class="info">
+            <h4>{{creature.name}}</h4>
+            <div>{{creature.description}}</div>
+        </div>
+    </div>
+</div>
