@@ -18,6 +18,10 @@ function router ($stateProvider, $urlRouterProvider) {
     .state("newCreature", {
       url: "/creature/new",
       template: "<new-creature></new-creature>"
+    })
+    .state("editCreature", {
+      url: "/creature/:id/edit",
+      template: "<edit-creature></edit-creature>"
     });
 
   $urlRouterProvider.otherwise("/");

@@ -1,3 +1,20 @@
 <h1>{{$ctrl.creature.name}}</h1>
 <p>{{$ctrl.creature.description}}</p>
+<a ng-click= "$ctrl.isEditing = true">Edit This Creature</a>
 <a ui-sref="home">Back</a>
+
+<div ng-if="$ctrl.isEditing">
+  <h4>Edit Creature Details</h4>
+  <form ng-submit="$ctrl.updateCreature($ctrl.creatureToEdit.id)">
+    <div>
+      <label for="newCreature-name">Name:</label>
+      <input type="text" id="newCreature-Name" ng-model="$ctrl.creature.name">
+    </div>
+    <div>
+      <label for="newCreature-description">Description:</label>
+      <input type="text" id="newCreature-Description" ng-model="$ctrl.creature.description">
+    </div>
+    <button class="submit_button" type="submit" value="Submit">Submit</button>
+    <a ng-click="$ctrl.isEditing=false">Nevermind</a>
+  </form>
+</div

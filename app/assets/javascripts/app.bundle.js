@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 61);
+/******/ 	return __webpack_require__(__webpack_require__.s = 62);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1052,17 +1052,17 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(16));
-__export(__webpack_require__(65));
 __export(__webpack_require__(66));
 __export(__webpack_require__(67));
 __export(__webpack_require__(68));
-__export(__webpack_require__(78));
+__export(__webpack_require__(69));
 __export(__webpack_require__(79));
 __export(__webpack_require__(80));
+__export(__webpack_require__(81));
 __export(__webpack_require__(45));
 __export(__webpack_require__(40));
-__export(__webpack_require__(81));
-__export(__webpack_require__(84));
+__export(__webpack_require__(82));
+__export(__webpack_require__(85));
 //# sourceMappingURL=index.js.map
 
 /***/ }),
@@ -2368,7 +2368,7 @@ exports.locationPluginFactory = locationPluginFactory;
 /* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(63);
+__webpack_require__(64);
 module.exports = angular;
 
 
@@ -4640,21 +4640,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var interface_1 = __webpack_require__(8);
 var transition_1 = __webpack_require__(18);
 var hookRegistry_1 = __webpack_require__(25);
-var coreResolvables_1 = __webpack_require__(69);
-var redirectTo_1 = __webpack_require__(70);
-var onEnterExitRetain_1 = __webpack_require__(71);
-var resolve_1 = __webpack_require__(72);
-var views_1 = __webpack_require__(73);
-var updateGlobals_1 = __webpack_require__(74);
-var url_1 = __webpack_require__(75);
+var coreResolvables_1 = __webpack_require__(70);
+var redirectTo_1 = __webpack_require__(71);
+var onEnterExitRetain_1 = __webpack_require__(72);
+var resolve_1 = __webpack_require__(73);
+var views_1 = __webpack_require__(74);
+var updateGlobals_1 = __webpack_require__(75);
+var url_1 = __webpack_require__(76);
 var lazyLoad_1 = __webpack_require__(47);
 var transitionEventType_1 = __webpack_require__(48);
 var transitionHook_1 = __webpack_require__(12);
 var predicates_1 = __webpack_require__(1);
 var common_1 = __webpack_require__(0);
 var hof_1 = __webpack_require__(2);
-var ignoredTransition_1 = __webpack_require__(76);
-var invalidTransition_1 = __webpack_require__(77);
+var ignoredTransition_1 = __webpack_require__(77);
+var invalidTransition_1 = __webpack_require__(78);
 /**
  * The default [[Transition]] options.
  *
@@ -4892,10 +4892,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var angular_1 = __webpack_require__(10);
 var core_1 = __webpack_require__(4);
 var views_1 = __webpack_require__(30);
-var templateFactory_1 = __webpack_require__(85);
+var templateFactory_1 = __webpack_require__(86);
 var stateProvider_1 = __webpack_require__(56);
-var onEnterExitRetain_1 = __webpack_require__(86);
-var locationServices_1 = __webpack_require__(87);
+var onEnterExitRetain_1 = __webpack_require__(87);
+var locationServices_1 = __webpack_require__(88);
 var urlRouterProvider_1 = __webpack_require__(57);
 angular_1.ng.module("ui.router.angular1", []);
 var mod_init = angular_1.ng.module('ui.router.init', []);
@@ -8791,6 +8791,30 @@ exports.UrlRouterProvider = UrlRouterProvider;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+editCreatureController.$inject = ['creaturesService', '$state'];
+
+function editCreatureController(creaturesService, $state) {
+  var vm = this;
+
+  vm.updateCreature = function (id) {
+    creaturesService.updateCreature(id).then(function (response) {
+      vm.creature = response;
+      $state.go("home");
+    });
+  };
+}
+exports.default = editCreatureController;
+
+/***/ }),
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 CreaturesController.$inject = ['creaturesService'];
 function CreaturesController(creaturesService) {
   var vm = this;
@@ -8806,7 +8830,7 @@ function CreaturesController(creaturesService) {
 exports.default = CreaturesController;
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8821,10 +8845,7 @@ function newCreatureController(creaturesService, $state) {
   var vm = this;
   vm.creature = {};
 
-  console.log('hello');
-
   vm.saveCreature = function () {
-    console.log("hi");
     creaturesService.saveCreature(vm.creature).then(function (response) {
       vm.creature = response;
       $state.go("home");
@@ -8834,7 +8855,7 @@ function newCreatureController(creaturesService, $state) {
 exports.default = newCreatureController;
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8853,33 +8874,43 @@ function CreatureController($stateParams, creaturesService) {
     });
   }
 
+  vm.updateCreature = function () {
+    vm.creatureToEdit = vm.creature;
+    creaturesService.updateCreature(vm.creatureToEdit).then(function (response) {
+      vm.creature = response;
+    });
+    vm.isEditing = false;
+  };
+
   activate();
 }
 exports.default = CreatureController;
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(62);
-__webpack_require__(93);
+__webpack_require__(63);
+__webpack_require__(94);
 __webpack_require__(58);
-__webpack_require__(95);
+__webpack_require__(96);
 __webpack_require__(59);
-__webpack_require__(97);
+__webpack_require__(98);
 __webpack_require__(60);
-module.exports = __webpack_require__(99);
+__webpack_require__(100);
+__webpack_require__(61);
+module.exports = __webpack_require__(102);
 
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var angular = __webpack_require__(15);
-__webpack_require__(64);
+__webpack_require__(65);
 
 angular.module("BogApp", ["ui.router"]).config(router);
 
@@ -8895,13 +8926,16 @@ function router($stateProvider, $urlRouterProvider) {
   }).state("newCreature", {
     url: "/creature/new",
     template: "<new-creature></new-creature>"
+  }).state("editCreature", {
+    url: "/creature/:id/edit",
+    template: "<edit-creature></edit-creature>"
   });
 
   $urlRouterProvider.otherwise("/");
 }
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports) {
 
 /**
@@ -42737,7 +42771,7 @@ $provide.value("$locale", {
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42757,16 +42791,16 @@ __export(__webpack_require__(29));
 __export(__webpack_require__(30));
 __export(__webpack_require__(56));
 __export(__webpack_require__(57));
-__webpack_require__(88);
 __webpack_require__(89);
 __webpack_require__(90);
 __webpack_require__(91);
 __webpack_require__(92);
+__webpack_require__(93);
 exports.default = "ui.router";
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42782,7 +42816,7 @@ __export(__webpack_require__(27));
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42797,7 +42831,7 @@ __export(__webpack_require__(19));
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42813,7 +42847,7 @@ __export(__webpack_require__(20));
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42832,7 +42866,7 @@ __export(__webpack_require__(7));
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42856,7 +42890,7 @@ exports.registerAddCoreResolvables = function (transitionService) {
 //# sourceMappingURL=coreResolvables.js.map
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42899,7 +42933,7 @@ exports.registerRedirectToHook = function (transitionService) {
 //# sourceMappingURL=redirectTo.js.map
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42962,7 +42996,7 @@ exports.registerOnEnterHook = function (transitionService) {
 //# sourceMappingURL=onEnterExitRetain.js.map
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43011,7 +43045,7 @@ exports.registerLazyResolveState = function (transitionService) {
 //# sourceMappingURL=resolve.js.map
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43064,7 +43098,7 @@ exports.registerActivateViews = function (transitionService) {
 //# sourceMappingURL=views.js.map
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43105,7 +43139,7 @@ exports.registerUpdateGlobalState = function (transitionService) {
 //# sourceMappingURL=updateGlobals.js.map
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43136,7 +43170,7 @@ exports.registerUpdateUrl = function (transitionService) {
 //# sourceMappingURL=url.js.map
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43173,7 +43207,7 @@ exports.registerIgnoredTransitionHook = function (transitionService) {
 //# sourceMappingURL=ignoredTransition.js.map
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43198,7 +43232,7 @@ exports.registerInvalidTransitionHook = function (transitionService) {
 //# sourceMappingURL=invalidTransition.js.map
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43232,7 +43266,7 @@ __export(__webpack_require__(28));
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43249,7 +43283,7 @@ __export(__webpack_require__(46));
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43262,7 +43296,7 @@ __export(__webpack_require__(44));
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43276,11 +43310,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @module vanilla
  */
 /** */
-__export(__webpack_require__(82));
+__export(__webpack_require__(83));
 //# sourceMappingURL=vanilla.js.map
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43298,11 +43332,11 @@ __export(__webpack_require__(53));
 __export(__webpack_require__(54));
 __export(__webpack_require__(55));
 __export(__webpack_require__(14));
-__export(__webpack_require__(83));
+__export(__webpack_require__(84));
 //# sourceMappingURL=index.js.map
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43337,7 +43371,7 @@ exports.memoryLocationPlugin = utils_1.locationPluginFactory("vanilla.memoryLoca
 //# sourceMappingURL=plugins.js.map
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43364,7 +43398,7 @@ exports.UIRouterPluginBase = UIRouterPluginBase;
 //# sourceMappingURL=interface.js.map
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43564,7 +43598,7 @@ var scopeBindings = function (bindingsObj) { return Object.keys(bindingsObj || {
 //# sourceMappingURL=templateFactory.js.map
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43595,7 +43629,7 @@ exports.getStateHookBuilder = function (hookName) {
 //# sourceMappingURL=onEnterExitRetain.js.map
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43676,7 +43710,7 @@ exports.Ng1LocationServices = Ng1LocationServices;
 //# sourceMappingURL=locationServices.js.map
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44050,7 +44084,7 @@ var $urlMatcherFactoryProvider;
 //# sourceMappingURL=injectables.js.map
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44627,7 +44661,7 @@ angular_1.ng.module('ui.router.state')
 //# sourceMappingURL=stateDirectives.js.map
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44679,7 +44713,7 @@ angular_1.ng.module('ui.router.state')
 //# sourceMappingURL=stateFilters.js.map
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44975,7 +45009,7 @@ angular_1.ng.module('ui.router.state').directive('uiView', $ViewDirectiveFill);
 //# sourceMappingURL=viewDirective.js.map
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45004,17 +45038,47 @@ angular_1.ng.module('ui.router.state').provider('$uiViewScroll', $ViewScrollProv
 //# sourceMappingURL=viewScroll.js.map
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _creatures = __webpack_require__(58);
+var _editController = __webpack_require__(58);
+
+var _editController2 = _interopRequireDefault(_editController);
+
+var _edit = __webpack_require__(95);
+
+var _edit2 = _interopRequireDefault(_edit);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var editCreatureComponent = {
+  controller: _editController2.default,
+  template: _edit2.default
+};
+
+angular.module("BogApp").component("editCreature", editCreatureComponent);
+
+/***/ }),
+/* 95 */
+/***/ (function(module, exports) {
+
+module.exports = "<h1>Edit Creature Details</h1>\n\n<form ng-submit=\"$ctrl.updateCreature()\">\n  <div>\n    <label for=\"newCreature-name\">Name:</label>\n    <input type=\"text\" id=\"newCreature-Name\" ng-model=\"$ctrl.creature.name\">\n  </div>\n  <div>\n    <label for=\"newCreature-description\">Description:</label>\n    <input type=\"text\" id=\"newCreature-Description\" ng-model=\"$ctrl.creature.description\">\n  </div>\n  <button class=\"submit_button\" type=\"submit\" value=\"Submit\">Submit</button>\n  <a class =\"nevermind_button\" ui-sref=\"home\">Nevermind</a>\n</form>\n";
+
+/***/ }),
+/* 96 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _creatures = __webpack_require__(59);
 
 var _creatures2 = _interopRequireDefault(_creatures);
 
-var _creatures3 = __webpack_require__(94);
+var _creatures3 = __webpack_require__(97);
 
 var _creatures4 = _interopRequireDefault(_creatures3);
 
@@ -45028,23 +45092,23 @@ var creaturesComponent = {
 angular.module("BogApp").component("creatures", creaturesComponent);
 
 /***/ }),
-/* 94 */
+/* 97 */
 /***/ (function(module, exports) {
 
 module.exports = "<h1>Creatures</h1>\n<div class=\"btn btn-large\" ui-sref=\"newCreature\">+ New Creature</div>\n<div class=\"creatures-container\">\n    <div class=\"creature\" ng-repeat=\"creature in $ctrl.creatures\" ui-sref=\"creature({id: creature.id})\">\n        <hr>\n        <div class=\"info\">\n            <h4>{{creature.name}}</h4>\n            <div>{{creature.description}}</div>\n        </div>\n    </div>\n</div>\n";
 
 /***/ }),
-/* 95 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _newController = __webpack_require__(59);
+var _newController = __webpack_require__(60);
 
 var _newController2 = _interopRequireDefault(_newController);
 
-var _new = __webpack_require__(96);
+var _new = __webpack_require__(99);
 
 var _new2 = _interopRequireDefault(_new);
 
@@ -45058,23 +45122,23 @@ var newCreatureComponent = {
 angular.module("BogApp").component("newCreature", newCreatureComponent);
 
 /***/ }),
-/* 96 */
+/* 99 */
 /***/ (function(module, exports) {
 
 module.exports = "\n<h1>Enter Details About New Creature</h1>\n\n<form ng-submit=\"$ctrl.saveCreature()\">\n  <div>\n    <label for=\"newCreature-name\">Name:</label>\n    <input type=\"text\" id=\"newCreature-Name\" ng-model=\"$ctrl.creature.name\" placeholder=\"Creature name\">\n  </div>\n  <div>\n    <label for=\"newCreature-description\">Description:</label>\n    <input type=\"text\" id=\"newCreature-Description\" ng-model=\"$ctrl.creature.description\" placeholder=\"Creature description\">\n  </div>\n  <button class=\"submit_button\" type=\"submit\" value=\"Submit\">Submit</button>\n  <a class =\"nevermind_button\" ui-sref=\"home\">Nevermind</a>\n</form>\n";
 
 /***/ }),
-/* 97 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _creature = __webpack_require__(60);
+var _creature = __webpack_require__(61);
 
 var _creature2 = _interopRequireDefault(_creature);
 
-var _creature3 = __webpack_require__(98);
+var _creature3 = __webpack_require__(101);
 
 var _creature4 = _interopRequireDefault(_creature3);
 
@@ -45088,13 +45152,13 @@ var creatureComponent = {
 angular.module("BogApp").component("creature", creatureComponent);
 
 /***/ }),
-/* 98 */
+/* 101 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>{{$ctrl.creature.name}}</h1>\n<p>{{$ctrl.creature.description}}</p>\n<a ui-sref=\"home\">Back</a>\n";
+module.exports = "<h1>{{$ctrl.creature.name}}</h1>\n<p>{{$ctrl.creature.description}}</p>\n<a ng-click= \"$ctrl.isEditing = true\">Edit This Creature</a>\n<a ui-sref=\"home\">Back</a>\n\n<div ng-if=\"$ctrl.isEditing\">\n  <h4>Edit Creature Details</h4>\n  <form ng-submit=\"$ctrl.updateCreature($ctrl.creatureToEdit.id)\">\n    <div>\n      <label for=\"newCreature-name\">Name:</label>\n      <input type=\"text\" id=\"newCreature-Name\" ng-model=\"$ctrl.creature.name\">\n    </div>\n    <div>\n      <label for=\"newCreature-description\">Description:</label>\n      <input type=\"text\" id=\"newCreature-Description\" ng-model=\"$ctrl.creature.description\">\n    </div>\n    <button class=\"submit_button\" type=\"submit\" value=\"Submit\">Submit</button>\n    <a ng-click=\"$ctrl.isEditing=false\">Nevermind</a>\n  </form>\n</div\n";
 
 /***/ }),
-/* 99 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45121,6 +45185,12 @@ function creaturesService($http) {
 
   service.saveCreature = function (newCreature) {
     return $http.post("/creatures", newCreature).then(function (res) {
+      return res.data;
+    });
+  };
+
+  service.updateCreature = function (creatureToEdit) {
+    return $http.put("/creatures/" + creatureToEdit.id, creatureToEdit).then(function (res) {
       return res.data;
     });
   };

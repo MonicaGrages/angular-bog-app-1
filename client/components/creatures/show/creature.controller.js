@@ -8,6 +8,14 @@ function CreatureController($stateParams, creaturesService){
     })
   }
 
+  vm.updateCreature = function() {
+    vm.creatureToEdit = vm.creature;
+    creaturesService.updateCreature(vm.creatureToEdit).then(response => {
+      vm.creature = response;
+    })
+    vm.isEditing = false;
+  }
+
 
   activate();
 

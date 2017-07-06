@@ -20,6 +20,16 @@ class CreaturesController < ApplicationController
     end
   end
 
+  def update
+    @creature = Creature.find(params[:id])
+    if @creature.update(creature_params)
+      render json: @creature
+    else
+      render status: 500,
+        json: {error: @creature.errors}
+    end
+  end
+
   private
   def creature_params
     params.require(:creature).permit(:name, :description)

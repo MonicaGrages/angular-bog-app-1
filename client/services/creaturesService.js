@@ -23,6 +23,13 @@ function creaturesService ($http) {
     });
   };
 
+  service.updateCreature = function (creatureToEdit) {
+    return $http.put("/creatures/"+creatureToEdit.id, creatureToEdit)
+      .then( res => {
+        return res.data;
+      })
+  }
+
   return service;
 }
 
